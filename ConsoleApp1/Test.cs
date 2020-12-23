@@ -2,41 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-public class Program
+class Solution
 {
 
-    public static void MonkandRotation()
-    {
-        long T = Convert.ToInt64(Console.ReadLine());
-
-        while (T-- > 0)
-        {
-            string NandK = Console.ReadLine();
-            long N = Convert.ToInt64(NandK.Split()[0]);
-            long K = Convert.ToInt64(NandK.Split()[1]);
-            long[] items = new long[N];
-            items = Console.ReadLine().Split().Select(Int64.Parse).ToArray();
-
-            long[] result = shiftRight(items, K);
-
-            Console.WriteLine(string.Join(" ", result));
-        }
-        Console.ReadLine();
-    }
-
-
-    public static long[] shiftRight(long[] arr, long K)
-    {
-        long[] demo = new long[arr.Length];
-        for (long i = 0; i < arr.Length; i++)
-        {
-            demo[(i + K) % demo.Length] = arr[i];
-        }
-        return demo;
-    }
-
-
-    public static void MonkandInversions()
+    static void Main(String[] args)
     {
         long T = Convert.ToInt64(Console.ReadLine());
         long i, j;
@@ -76,18 +45,18 @@ public class Program
                     }
                 }
             }
-
             Console.WriteLine(count);
-
-
         }
 
 
         Console.ReadLine();
-
-
-
     }
+
+
+
+
+
+
 
 
 }
