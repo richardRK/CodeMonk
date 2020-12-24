@@ -8,30 +8,31 @@ public class Test
     static void Main(String[] args)
     {
         var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-        int N = Convert.ToInt32(Console.ReadLine());
-        TwoSum(input, N);
+        var res = RunningSum1DArray(input);
     }
 
-    public static int[] TwoSum(int[] nums, int target)
+    private static int[] RunningSum1DArray(int[] input)
     {
+        int N = input.Length;
+        List<int> lst = new List<int>();
+        int calcSum = 0;
+        for (int i = 0; i < N; i++)
+        {
+            if (i == 0)
+            {
+                lst.Add(input[i]);
+            }
+            else
+            {
+                for (int k = i; k >= 0; k--)
+                {
+                    calcSum += input[k];
+                }
 
-
-
-
+                lst.Add(calcSum);
+                calcSum = 0;
+            }
+        }
+        return lst.ToArray();
     }
-
-    private static string leftRotateShift(string B, int shift)
-    {
-        shift %= B.Length;
-        return B.Substring(shift) + B.Substring(0, shift);
-    }
-
-    private static string rightRotateShift(string B, int shift)
-    {
-        shift %= B.Length;
-        return B.Substring(B.Length - shift) + B.Substring(0, B.Length - shift);
-    }
-
-
-
 }
