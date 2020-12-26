@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 public class Test
 {
+    //public static int K;
 
     static void Main(String[] args)
     {
@@ -25,13 +26,32 @@ public class Test
                 new int[] { 2, 76 }
             };
 
-
         HighFive(studentIDS);
     }
 
-    private static void HighFive(int[][] items)
+    private static int[][] HighFive(int[][] items)
     {
-        Sort(items, 1);
+        int K = 5;
+
+        items = items.OrderByDescending(y => y[1]).ToArray();
+
+        int N = items.Length;
+        List<int[]> solution = new List<int[]>();
+        int i = 0;
+        while (i < N)
+        {
+            int id = items[i][0];
+            int sum = 0;
+
+            // obtain total using the top 5 scores
+            for (int k = i; k < i + K; ++k)
+                sum += items[k][1];
+            // ignore all the other scores for the same id
+            while (i < N && items[i][0] == id)
+                i++;
+            solution.Add(new int[] { id, sum / K });
+        }
+        return solution.ToArray();
     }
     private static void Sort<T>(T[][] data, int col)
     {
@@ -44,15 +64,15 @@ public class Test
     {
         int N = input.Length;
         List<int> lst = new List<int>();
-         int calcSum = 0;
+        int calcSum = 0;
         for (int i = 0; i < N; i++)
         {
-                for (int k = i; k >= 0; k--)
-                {
-                    calcSum += input[k];
-                }
-                lst.Add(calcSum);
-                calcSum = 0;
+            for (int k = i; k >= 0; k--)
+            {
+                calcSum += input[k];
+            }
+            lst.Add(calcSum);
+            calcSum = 0;
         }
         return lst.ToArray();
     }
